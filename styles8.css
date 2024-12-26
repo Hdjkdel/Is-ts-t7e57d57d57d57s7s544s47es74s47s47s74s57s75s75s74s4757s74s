@@ -1,0 +1,116 @@
+/* Genel Ayarlar */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #001f3f;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100vh;
+}
+
+/* Başlık ve Alt Başlık */
+.container {
+    text-align: center;
+    padding: 20px;
+}
+
+.title {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.subtitle {
+    font-size: 14px;
+    color: #aaa;
+    margin-bottom: 20px;
+}
+
+/* Coin Grid */
+.coin-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* 2 sütun olacak */
+    gap: 20px; /* Coinler arası boşluk */
+    justify-content: center;
+    align-items: center;
+    padding: 0 50px; /* Sağdan ve soldan boşluk */
+}
+
+.coin {
+    width: 120px;
+    height: 130px;
+    background-color: #333;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    border: 2px solid transparent;
+    transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+.coin img {
+    width: 120%;
+    height: 100%;
+}
+
+.coin.selected {
+    border: 4px solid #00ff00;
+    background-color: #111;
+    transform: scale(1.1);
+}
+
+/* Start Butonu */
+#start-button {
+    background-color: #00b300;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 20px;
+}
+
+#start-button:hover {
+    background-color: #008f00;
+}
+
+/* Sabit Alt Çerçeve */
+.fixed-footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 80px;
+    background-color: #001f3f;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 70px; /* Butonlar arasındaki boşluk */
+    border-top: 2px solid #004080;
+    z-index: 1000;
+}
+
+.icon-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    width: 60px;
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 8px;
+    transition: background-color 0.3s;
+}
+
+.icon-btn:hover {
+    background-color: #004080;
+}
+
+.icon-btn img {
+    width: 40px;
+    height: 40px;
+}
