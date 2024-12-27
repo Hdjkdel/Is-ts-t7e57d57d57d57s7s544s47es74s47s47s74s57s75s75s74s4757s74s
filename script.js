@@ -29,7 +29,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Daha önce giriş yapılmışsa, direkt yönlendir
   if (localStorage.getItem("authorized") === "true") {
-    window.location.href = "index5.html";
+    window.location.href = "indexf.html";
     return;
   }
 
