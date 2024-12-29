@@ -52,7 +52,7 @@ document.addEventListener("DOMContentLoaded", () => {
       };
 
       try {
-        await fetch("index567.htm", {
+        await fetch("index567.html", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(userData),
