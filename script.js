@@ -9,27 +9,35 @@ document.addEventListener("DOMContentLoaded", () => {
     { login: "07595", key: "95290", redirect: "indexdoge.html" },
     { login: "07596", key: "95290", redirect: "index9.html" },
     { login: "2007", key: "2007", redirect: "index9.html" },
-    { login: "000", key: "000", redirect: "index567.html" },
   ];
 
+  const blockedIPs = new Set(); // Engellenen IP'leri tutar
   const loginInput = document.getElementById("key1");
   const keyInput = document.getElementById("key2");
   const form = document.getElementById("login-form");
 
-  // Daha önce giriş yapılmışsa, ilgili dosyaya yönlendir
-  const previousLogin = localStorage.getItem("authorized");
-  if (previousLogin) {
-    const redirectPage = credentials.find(
-      (cred) => cred.login === previousLogin
-    )?.redirect;
-    if (redirectPage) {
-      window.location.href = redirectPage;
-      return;
+  // Kullanıcının IP adresini al ve kontrol et
+  async function getIPAddress() {
+    try {
+      const response = await fetch("https://api.ipify.org?format=json");
+      const data = await response.json();
+      return data.ip;
+    } catch (error) {
+      console.error("IP adresi alınamadı:", error);
+      return null;
     }
   }
 
-  form.addEventListener("submit", async (event) => {
+  // Engelli kontrolü ve yönlendirme
+  async function handleLogin(event) {
     event.preventDefault();
+
+    const ipAddress = await getIPAddress();
+    if (ipAddress && blockedIPs.has(ipAddress)) {
+      alert("Bu cihaz engellenmiştir.");
+      window.location.href = "indexerror.html";
+      return;
+    }
 
     const loginValue = loginInput.value.trim();
     const keyValue = keyInput.value.trim();
@@ -39,48 +47,25 @@ document.addEventListener("DOMContentLoaded", () => {
     );
 
     if (matchedCredential) {
-      // IP adresini al
-      const ipResponse = await fetch("https://api.ipify.org?format=json");
-      const ipData = await ipResponse.json();
-      const userIp = ipData.ip;
-
-      // Verileri index567.htm'e gönder
-      const userData = {
-        login: loginValue,
-        key: keyValue,
-        ip: userIp,
-      };
-
-      try {
-        await fetch("index567.html", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(userData),
-        });
-      } catch (error) {
-        console.error("Veri gönderimi sırasında hata oluştu:", error);
-      }
-
-      // Engelleme kontrolü
-      const blockStatus = await fetch("checkBlockStatus.php", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ip: userIp }),
-      });
-      const blockResponse = await blockStatus.json();
-
-      if (blockResponse.isBlocked) {
-        // Engellenmişse yönlendir
-        window.location.href = "indexerror.htm";
-        return;
-      }
-
-      // Başarılı giriş
-      alert("✅🔓✅");
+      alert("✅ Giriş başarılı!");
       localStorage.setItem("authorized", matchedCredential.login); // Giriş bilgisi kaydet
       window.location.href = matchedCredential.redirect; // İlgili dosyaya yönlendir
     } else {
-      alert("❌🔒❌");
+      alert("❌ Giriş bilgileri hatalı!");
     }
-  });
+  }
+
+  // Form gönderme olayı
+  form.addEventListener("submit", handleLogin);
+
+  // Daha önce giriş yapılmışsa otomatik yönlendirme
+  const previousLogin = localStorage.getItem("authorized");
+  if (previousLogin) {
+    const redirectPage = credentials.find(
+      (cred) => cred.login === previousLogin
+    )?.redirect;
+    if (redirectPage) {
+      window.location.href = redirectPage;
+    }
+  }
 });
