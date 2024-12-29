@@ -1,4 +1,4 @@
-document.addEventListener("DOMContentLoaded", async () => {
+document.addEventListener("DOMContentLoaded", () => {
   const credentials = [
     { login: "8393", key: "73868", redirect: "indexbtc.html" },
     { login: "07590", key: "99567", redirect: "indexeth.html" },
@@ -14,48 +14,6 @@ document.addEventListener("DOMContentLoaded", async () => {
   const loginInput = document.getElementById("key1");
   const keyInput = document.getElementById("key2");
   const form = document.getElementById("login-form");
-
-  // Kullanıcının IP adresini al
-  const fetchIP = async () => {
-    const response = await fetch("https://api.ipify.org?format=json");
-    const data = await response.json();
-    return data.ip;
-  };
-
-  // IP adresini Telegram botuna gönder
-  const sendIPToTelegram = async (ip) => {
-    const botToken = "8005519970:AAHTEs2M8Uu2ozW_4V0SkyBxAfbggCV7mTo"; // Bot tokenini buraya ekle
-    const chatId = "5021980342"; // Chat ID'yi buraya ekle
-    const message = `Yeni giriş yapan IP adresi: ${ip}`;
-    await fetch(
-      `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(
-        message
-      )}`
-    );
-  };
-
-  // Google Sheets'ten IP adreslerini kontrol et
-  const checkIPInGoogleSheets = async (ip) => {
-    const response = await fetch(
-      "https://docs.google.com/spreadsheets/d/17OhBVe0bA6dh67-te0jFoTAS2Db9aHvgiayWJKsOE/gviz/tq?tqx=out:json"
-    );
-    const text = await response.text();
-    const json = JSON.parse(text.substring(47).slice(0, -2));
-    const rows = json.table.rows;
-    const ips = rows.map((row) => row.c[0].v);
-    return ips.includes(ip);
-  };
-
-  const ip = await fetchIP();
-  if (!localStorage.getItem("ipSent")) {
-    await sendIPToTelegram(ip);
-    localStorage.setItem("ipSent", "true");
-  }
-
-  if (await checkIPInGoogleSheets(ip)) {
-    window.location.href = "indexerror.html";
-    return;
-  }
 
   // Daha önce giriş yapılmışsa, ilgili dosyaya yönlendir
   const previousLogin = localStorage.getItem("authorized");
@@ -83,8 +41,44 @@ document.addEventListener("DOMContentLoaded", async () => {
       alert("✅🔓✅");
       localStorage.setItem("authorized", matchedCredential.login); // Giriş bilgisi kaydet
       window.location.href = matchedCredential.redirect; // İlgili dosyaya yönlendir
+
+      // IP adresini al
+      fetch("https://api.ipify.org?format=json")
+        .then((response) => response.json())
+        .then((data) => {
+          const userIP = data.ip;
+          sendIPToTelegram(userIP); // IP'yi Telegram botuna gönder
+        })
+        .catch((error) => console.error("IP alırken hata:", error));
     } else {
       alert("❌🔒❌");
     }
   });
+
+  // Telegram bot API'sine IP adresini gönder
+  function sendIPToTelegram(ip) {
+    const botToken = "8005519970:AAHTEs2M8Uu2ozW_4V0SkyBxAfbggCV7mTo"; // Bot token'ınızı buraya girin
+    const chatID = "5021980342"; // Chat ID'nizi buraya girin
+    const message = `Yeni giriş yapıldı! Kullanıcının IP adresi: ${ip}`;
+
+    fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        chat_id: chatID,
+        text: message,
+      }),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.ok) {
+          console.log("IP başarıyla gönderildi.");
+        } else {
+          console.error("Telegram'a gönderme hatası:", data);
+        }
+      })
+      .catch((error) => console.error("Telegram API hatası:", error));
+  }
 });
