@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kullanıcı Yönetimi</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+      background-color: #f9f9f9;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+    th, td {
+      border: 1px solid #ddd;
+      padding: 8px;
+      text-align: center;
+    }
+    th {
+      background-color: #4CAF50;
+      color: white;
+    }
+    button {
+      padding: 5px 10px;
+      margin: 5px;
+      border: none;
+      cursor: pointer;
+    }
+    .block-btn {
+      background-color: red;
+      color: white;
+    }
+    .unblock-btn {
+      background-color: green;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+  <h1>Kullanıcı Yönetimi</h1>
+  <table>
+    <thead>
+      <tr>
+        <th>IP Adresi</th>
+        <th>Kullanıcı Adı</th>
+        <th>Anahtar</th>
+        <th>Durum</th>
+        <th>İşlem</th>
+      </tr>
+    </thead>
+    <tbody id="userTable">
+      <!-- Veriler dinamik olarak buraya yüklenecek -->
+    </tbody>
+  </table>
+</body>
+<script src="management.js"></script>
+</html>
