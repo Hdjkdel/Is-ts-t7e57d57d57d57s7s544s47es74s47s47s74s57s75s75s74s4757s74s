@@ -12,7 +12,7 @@
     <h1>Blockchain</h1> 
     <p>STATISTICS ON specific blockchain</p> 
    </header> 
-   <div class="statistics-grid"> <!-- İstatistik kutuları --> 
+   <div class="statistics-grid"> 
     <div class="stat-box"> <span>0,00$<b>btc</b></span> 
      <p>in all the time</p> 
     </div> 
@@ -48,7 +48,14 @@
      <div class="dashboard-box"> <span>0,00$</span> 
       <p>recently</p> 
      </div> 
-    </div> <button id="withdraw-btn" class="withdraw-btn">WITHDRAW</button> 
+    </div> 
+
+    <!-- Cüzdan adresi için giriş alanı -->
+    <label for="wallet-address">Wallet Address:</label>
+    <input type="text" id="wallet-address" class="wallet-input" placeholder="Enter wallet address">
+    <button id="toggle-visibility" class="toggle-btn">🔒</button> 
+   <p>.</p> 
+    <button id="withdraw-btn" class="withdraw-btn">WITHDRAW</button> 
    </section> 
    <p></p> 
    <p></p> 
@@ -57,7 +64,16 @@
    <p>.</p> 
    <p>.</p> 
   </div> <!-- Sabit alt çerçeve --> 
-  <div class="fixed-footer"> <button class="icon-btn" onclick="window.location.href='index.html'"> <img src="seach.png" alt="BTC"> </button> <button class="icon-btn" onclick="window.location.href='indecx5.html'"> <img src="dahsbord.png" alt="ETH"> </button> <button class="icon-btn" onclick="window.location.href='indexsport.html'"> <img src="spport.png" alt="TRX"> </button> 
+  <div class="fixed-footer"> 
+    <button class="icon-btn" onclick="window.location.href='index.html'"> 
+      <img src="seach.png" alt="BTC"> 
+    </button> 
+    <button class="icon-btn" onclick="window.location.href='eth-file.html'"> 
+      <img src="dahsbord.png" alt="ETH"> 
+    </button> 
+    <button class="icon-btn" onclick="window.location.href='indexsport.html'"> 
+      <img src="spport.png" alt="TRX"> 
+    </button> 
   </div> 
   <script src="scriptx.js"></script> 
  </body>
