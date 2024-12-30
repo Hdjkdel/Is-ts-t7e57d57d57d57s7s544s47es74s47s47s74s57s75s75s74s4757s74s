@@ -126,6 +126,7 @@ header p {
     display: block;
 }
 
+/* Withdraw Butonu */
 .withdraw-btn {
     padding: 15px 40px;
     font-size: 18px;
@@ -135,8 +136,51 @@ header p {
     border-radius: 5px;
     cursor: pointer;
     text-transform: uppercase;
+    transition: background-color 0.3s, transform 0.2s;
 }
 
 .withdraw-btn:hover {
     background-color: #0056b3;
+    transform: scale(1.05);
+}
+
+/* Cüzdan Adresi Giriş Alanı */
+#wallet-address {
+    width: 80%;
+    padding: 12px;
+    margin-top: 15px;
+    font-size: 16px;
+    color: #000;
+    border: 1px solid #004080;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+/* Görünürlük Butonu */
+#toggle-visibility {
+    margin-top: 10px;
+    padding: 10px 15px;
+    font-size: 14px;
+    background-color: #007bff;
+    border: 1px solid #004080;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+#toggle-visibility:hover {
+    background-color: #0056b3;
+}
+
+/* Alert Mesajları */
+.alert {
+    font-size: 14px;
+    color: #d9534f;
+    margin-top: 10px;
+}
+
+/* Input Alanı ve Butonlar Arasındaki Mesafe */
+form div {
+    margin-bottom: 15px;
 }
