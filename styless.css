@@ -2,7 +2,10 @@
 body {
     margin: 0;
     font-family: 'Orbitron', sans-serif;
-    background-color: #000;
+    background-image: url('1.png'); /* Buraya resminizin yolu gelecek */
+    background-size: cover; /* Resmin tamamını kapsar */
+    background-position: center center; /* Resmi ortalar */
+    background-attachment: fixed; /* Arka planın kaymamasını sağlar */
     color: #fff;
     text-align: center;
 }
@@ -49,20 +52,35 @@ body {
     height: 40px;
 }
 
-/* Üst Kısım */
+/* Üst Kısım (Logo ve Başlık) */
 header {
     display: flex;
-    flex-direction: column;
+    justify-content: space-between;
     align-items: center;
-    justify-content: center;
-    gap: 10px;
-    margin-bottom: 20px;
+    padding: 10px 20px;
+    background-color: rgba(0, 0, 0, 0.7);
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 9999;
 }
 
+.logo {
+    width: 40px;
+    height: 40px;
+}
+
+.title {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+/* Start/Stop Butonu */
 .start-btn {
     font-size: 24px;
     padding: 10px 30px;
-    background-color: #ff0000;
+    background-color: #003;
     color: #fff;
     border: none;
     cursor: pointer;
@@ -71,19 +89,18 @@ header {
 }
 
 .start-btn:hover {
-    background-color: #cc0000;
+    background-color: #003;
 }
 
 /* Cüzdan Tarama Alanı */
 .wallet-scanner, .statistics {
-    margin: 20px auto;
+    margin: 5px auto;
     width: 90%;
     max-width: 800px;
 }
 
 .transparent-box {
     background-color: rgba(0, 0, 0, 0.8);
-    border: 1px solid #fff;
     padding: 0;
     border-radius: 5px;
     height: 300px;
@@ -92,7 +109,7 @@ header {
 }
 
 .inner-box {
-    background-color: #add8fa; /* İç kısım mavi */
+    background-color: #000; /* İç kısım mavi */
     height: 100%;
     border-radius: 5px;
     overflow-y: auto;
@@ -122,6 +139,7 @@ header {
     padding: 5px;
     background-color: rgba(255, 255, 255, 0.1);
     border-radius: 5px;
+    border: 2px solid red; /* çerçeve */
 }
 
 .found-wallet img {
