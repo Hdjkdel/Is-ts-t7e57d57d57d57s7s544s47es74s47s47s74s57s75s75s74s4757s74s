@@ -8,7 +8,7 @@ document.addEventListener("DOMContentLoaded", () => {
     { login: "07594", key: "94027", redirect: "indexpl.html" },
     { login: "07595", key: "95290", redirect: "indexdoge.html" },
     { login: "07596", key: "95290", redirect: "index9.html" },
-    { login: "2007", key: "2007", redirect: "index9.html" },
+    { login: "23236", key: "90890", redirect: "indexusdt.html" },
   ];
 
   const loginInput = document.getElementById("key1");
