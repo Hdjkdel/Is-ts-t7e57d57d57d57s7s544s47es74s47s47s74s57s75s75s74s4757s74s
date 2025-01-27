@@ -2,16 +2,55 @@
 body {
     margin: 0;
     font-family: 'Orbitron', sans-serif;
-    background-image: url('1.png'); /* Buraya resminizin yolu gelecek */
-    background-size: cover; /* Resmin tamamını kapsar */
-    background-position: center center; /* Resmi ortalar */
-    background-attachment: fixed; /* Arka planın kaymamasını sağlar */
-    color: #fff;
+    background-image: url('1.png'); /* Arka plan resmi */
+    background-size: cover; /* Resmi tam ekrana uyarlar */
+    background-position: center; /* Resmi ortalar */
+    background-attachment: fixed; /* Arka plan sabit kalır */
     text-align: center;
+    color: #000; /* Varsayılan yazı rengi aydınlık moda uygun */
 }
 
-.container {
-    padding: 20px;
+/* Karanlık ve Aydınlık Mod Ayarları */
+@media (prefers-color-scheme: dark) {
+    body {
+        background-color: #000; /* Karanlık modda arka plan siyah */
+        color: #fff; /* Yazılar beyaz */
+    }
+
+    .inner-box {
+        background-color: rgba(0, 0, 0, 0.8); /* Koyu şeffaf kutu */
+        color: #fff; /* İçerik yazıları beyaz */
+    }
+
+    .found-wallet {
+        background-color: rgba(255, 255, 255, 0.1); /* Şeffaf arka plan */
+        border: 2px solid red;
+    }
+
+    .found-wallet span {
+        color: #fff; /* Cüzdan adresi beyaz */
+    }
+}
+
+@media (prefers-color-scheme: light) {
+    body {
+        background-color: #000; /* Aydınlık modda arka plan beyaz */
+        color: #FFFFFF; /* Yazılar siyah */
+    }
+
+    .inner-box {
+        background-color: rgba(240, 240, 240, 0.9); /* Açık gri kutu */
+        color: #FFFFFF; /* İçerik yazıları siyah */
+    }
+
+    .found-wallet {
+        background-color: rgba(0, 0, 0, 0.05); /* Açık şeffaf kutu */
+        border: 2px solid red;
+    }
+
+    .found-wallet span {
+        color: #FFFFFF; /* Cüzdan adresi siyah */
+    }
 }
 
 /* Sabit Alt Çerçeve */
@@ -89,7 +128,7 @@ header {
 }
 
 .start-btn:hover {
-    background-color: #003;
+    background-color: #004;
 }
 
 /* Cüzdan Tarama Alanı */
@@ -103,26 +142,19 @@ header {
     background-color: rgba(0, 0, 0, 0.8);
     padding: 0;
     border-radius: 5px;
-    height: 300px;
-    max-height: 350px;
+    height: 300px; /* Sabit yükseklik */
     box-sizing: border-box;
+    overflow: hidden; /* Kutudan taşmaları gizler */
 }
 
 .inner-box {
-    background-color: #000; /* İç kısım mavi */
+    background-color: rgba(255, 255, 255, 0.1);
     height: 100%;
     border-radius: 5px;
-    overflow-y: auto;
+    overflow-y: auto; /* Kaydırma çubuğunu aktif eder */
     padding: 10px;
     box-sizing: border-box;
-    color: #000;
-}
-
-#wallet-display {
-    font-size: 16px;
-    text-align: left;
-    padding: 10px;
-    box-sizing: border-box;
+    color: inherit; /* Yazı rengi genel ayarlarla uyumlu */
 }
 
 /* Bulunan Cüzdanlar */
@@ -139,20 +171,19 @@ header {
     padding: 5px;
     background-color: rgba(255, 255, 255, 0.1);
     border-radius: 5px;
-    border: 2px solid red; /* çerçeve */
+    border: 2px solid red;
 }
 
 .found-wallet img {
-    width: 30px; /* Logo genişliği */
-    height: 30px; /* Logo yüksekliği */
-    margin-right: 10px; /* Logonun metinden uzaklığı */
-    border-radius: 5px; /* Logonun kenarlarının yumuşatılması */
+    width: 30px;
+    height: 30px;
+    margin-right: 10px;
+    border-radius: 5px;
 }
 
 .found-wallet span {
     font-size: 16px;
     font-weight: bold;
-    color: #fff;
 }
 
 /* Alt Bilgi */
